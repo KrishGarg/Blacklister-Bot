@@ -7,7 +7,7 @@ from cogs.ServerPrefix import get_prefix
 load_dotenv()
 
 bot = commands.Bot(command_prefix=get_prefix, intent=discord.Intents.all(), help_command=None)
-
+bot.owner_ids = {506093256501755904, 453875226757955585}
 
 @bot.event
 async def on_ready():
