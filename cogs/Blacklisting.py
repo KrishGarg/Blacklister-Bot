@@ -36,11 +36,15 @@ class BlackListing(commands.Cog):
     if msgObj.author.guild_permissions.administrator:
       return
 
-    if (msgObj.content.startswith(f"{self.bot.command_prefix}addword") or msgObj.content.startswith(f"{self.bot.command_prefix}deleteword") or msgObj.content.startswith(f"{self.bot.command_prefix}add") or msgObj.content.startswith(f"{self.bot.command_prefix}delete")) and msgObj.author.guild_permissions.administrator:
-      return
-
     db = sqlite3.connect('main.db')
     c = db.cursor()
+    c.execute("SELECT prefix FROM prefixes WHERE guild_id = ?", (msgObj.guild.id,))
+    pref = c.fetchone()
+    pref = pref[0]
+
+    if (msgObj.content.startswith(f"{pref}addword") or msgObj.content.startswith(f"{pref}deleteword") or msgObj.content.startswith(f"{pref}add") or msgObj.content.startswith(f"{pref}delete")) and msgObj.author.guild_permissions.administrator:
+      db.close()
+      return
     
     c.execute("SELECT words FROM blacklist WHERE guild_id = ?",(msgObj.guild.id,))
 
