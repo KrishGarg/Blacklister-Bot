@@ -16,6 +16,13 @@ class HelpCommand(commands.Cog):
     pref = pref[0]
     db.close()
 
+    info_embed = discord.Embed(title='↓ Basic Information ↓', color=0xffff00, description='''
+• **The bot will ignore the blacklisted words sent by members with Administrator permission.**
+• **Code to the bot's repository:** [Click Me!](https://github.com/KrishGarg/Blacklister-Bot)
+• **Link to the support server:** [Click Me!](https://discord.gg/258wAYANQz)
+• **All the commands are on the following pages.**
+''')
+
     blacklist_embed = discord.Embed(title="↓ BlackList Commands ↓",color=0xffff00)
     blacklist_embed.add_field(name='Adding words/phrases to the blacklist:',value='''
 ```fix
@@ -56,9 +63,15 @@ or
 {0}invite
 ```
     '''.format(pref), inline=False)
+    other_embed.add_field(name='Prefix Changing Command:',value='''
+```fix
+{0}prefix <new prefix>
+```
+**Note: If the prefix command is ran without the new prefix, it will show the current server prefix.**
+    '''.format(pref), inline=False)
 
     paginator = DiscordUtils.Pagination.AutoEmbedPaginator(ctx)
-    embeds = [blacklist_embed, other_embed]
+    embeds = [info_embed, blacklist_embed, other_embed]
     await paginator.run(embeds)
 
 def setup(bot):
