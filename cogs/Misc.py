@@ -12,11 +12,15 @@ class Misc(commands.Cog):
   @commands.command()
   async def invite(self, ctx):
     embed1 = discord.Embed(title='Invite Me To Your Server!',color=0xffff00)
-    embed1.add_field(name='↓ Invite Link ↓',value='''
+    embed1.add_field(name="↓ Bot's Invite Link ↓",value='''
 [Click me to open
 the invite link in
-your browser!](https://discord.com/api/oauth2/authorize?client_id=796422925502775378&permissions=387136&scope=bot)
+your browser!](https://discord.com/oauth2/authorize?client_id=796422925502775378&scope=bot&permissions=355400)
 ''',inline=True)
+    embed1.add_field(name='↓ Support Server Invite Link ↓',value='''
+[Click me to join
+the server!](https://discord.gg/258wAYANQz)
+    ''',inline=True)
     await ctx.send(embed=embed1)
 
 def setup(bot):
