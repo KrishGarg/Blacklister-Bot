@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 import sqlite3
 import random
@@ -31,6 +32,9 @@ class BlackListing(commands.Cog):
 
   async def if_blacklisted_word_in_message_logic(self, msgObj):
     if msgObj.author.bot:
+      return
+
+    if isinstance(msgObj.author, discord.User):
       return
 
     if msgObj.author.guild_permissions.administrator:
@@ -115,10 +119,11 @@ class BlackListing(commands.Cog):
       else:
         datatosend = str(data[0][0])
         dts = datatosend.split(',')
-        d = ""
+        d = "||"
         for x in dts:
           if not x == "":
             d += f"**{x}**\n" 
+        d += "||"
         await ctx.send(f"All the words set as blacklisted for this server are as follows:- \n{d}")
     except Exception as ex:
       print(ex)
